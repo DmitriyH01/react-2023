@@ -1,18 +1,20 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "target": "ES6",
+    "module": "CommonJS",
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
-//     "sourceMap": true,
+    "sourceMap": true,
     ////////////////////////////////////////
     "strict": true,
-    "esModuleInterop": true,
-    "allowJs": true,
+    "esModuleInterop": true, // if some library don`t have default import
+    // "checkJs": true,            /*  if need to use js "near" TS */
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
     "jsx": "react",
     "rootDir": "./src/",
     "outDir": "./dist/"
-    //     "strictPropertyInitialization": false
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
