@@ -1,14 +1,15 @@
 import React from "react";
+import { PostPropsValue } from "../types/post";
 
-const PostItem = () => {
+const PostItem = (props: PostPropsValue) => {
+  const post = props.value;
   return (
     <div className="post">
       <div className="post__content">
-        <strong>1. TypeScript</strong>
-        <div>
-          TypeScript - TypeScript adds additional syntax to JavaScript to support a tighter
-          integration with your editor. Catch errors early in your editor.
-        </div>
+        <strong>
+          {post.id}. {post.title}
+        </strong>
+        <div>{post.body}</div>
       </div>
       <div className="post__btn">
         <button>Delete Post</button>

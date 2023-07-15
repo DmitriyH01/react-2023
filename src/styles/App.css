@@ -12,6 +12,9 @@
 .App {
   width: 800px;
 }
+.postHeading {
+  text-align: center;
+}
 
 .post {
   display: flex;
@@ -20,4 +23,13 @@
   margin-top: 15px;
   justify-content: space-between;
   align-items: center;
+}
+
+.post__btn {
+  padding: 0 0 0 4px;
+}
+
+.post__btn button {
+  height: 30px;
+  width: 90px;
 }
