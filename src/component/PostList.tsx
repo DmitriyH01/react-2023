@@ -1,13 +1,14 @@
 import React from "react";
 import PostItem from "./PostItem";
-import { PostListsProps, PostValue } from "../types/post";
+import { PostListsProps } from "../types/post";
 
 const PostList = (props: PostListsProps) => {
-  const posts: PostValue[] = props.posts;
+  const posts = props.posts;
+  const title = props.title;
 
   return (
     <div>
-      <h1 className="postHeading"> Posts List </h1>
+      <h1 className="postHeading"> {title} </h1>
       {posts.map((post) => (
         <PostItem value={post} key={post.id} />
       ))}

@@ -1,5 +1,6 @@
 export type PostListsProps = {
   posts: PostValue[];
+  title: string;
 };
 
 export type PostPropsValue = {

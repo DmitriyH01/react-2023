@@ -1,19 +1,44 @@
 import React from "react";
 import "./styles/App.css";
 import { PostValue } from "./types/post";
-import { POST_ITEM_TEXT, POST_ID_COUNT } from "./config/text";
+import { DEVELOPERS_ITEM_TEXT, LANGUAGES_ITEM_TEXT, LISTS_TITLES } from "./config/text";
 import PostList from "./component/PostList";
+import { getPostTitle } from "./utils/functions";
 
 function App() {
-  const [posts, setPosts] = React.useState<PostValue[]>([
-    { id: POST_ID_COUNT.typeScript, title: "TypeScript", body: POST_ITEM_TEXT.typeScript },
-    { id: POST_ID_COUNT.java, title: "Java", body: POST_ITEM_TEXT.java },
-    { id: POST_ID_COUNT.python, title: "Python", body: POST_ITEM_TEXT.python },
+  const [postsLanguages, setPostsLanguages] = React.useState<PostValue[]>([
+    {
+      id: 1,
+      title: getPostTitle(LANGUAGES_ITEM_TEXT.typeScript),
+      body: LANGUAGES_ITEM_TEXT.typeScript,
+    },
+    { id: 2, title: getPostTitle(LANGUAGES_ITEM_TEXT.java), body: LANGUAGES_ITEM_TEXT.java },
+    { id: 3, title: getPostTitle(LANGUAGES_ITEM_TEXT.python), body: LANGUAGES_ITEM_TEXT.python },
   ]);
+  const [postsDevelopers, setPostsDevelopers] = React.useState<PostValue[]>([
+    {
+      id: 1,
+      title: getPostTitle(DEVELOPERS_ITEM_TEXT.frontend),
+      body: DEVELOPERS_ITEM_TEXT.frontend,
+    },
+    {
+      id: 2,
+      title: getPostTitle(DEVELOPERS_ITEM_TEXT.backend),
+      body: DEVELOPERS_ITEM_TEXT.backend,
+    },
+    {
+      id: 3,
+      title: getPostTitle(DEVELOPERS_ITEM_TEXT.fullstack),
+      body: DEVELOPERS_ITEM_TEXT.fullstack,
+    },
+  ]);
+  const [titleLanguages, setTitleLanguages] = React.useState<string>(LISTS_TITLES.listLanguages);
+  const [titleDevelopers, setTitleDevelopers] = React.useState<string>(LISTS_TITLES.listDevelopers);
 
   return (
     <div className="App">
-      <PostList posts = {posts} />
+      <PostList posts={postsLanguages} title={titleLanguages} />
+      <PostList posts={postsDevelopers} title={titleDevelopers} />
     </div>
   );
 }
