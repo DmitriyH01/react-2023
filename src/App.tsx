@@ -4,6 +4,7 @@ import { PostValue } from "./types/post";
 import { DEVELOPERS_ITEM_TEXT, LANGUAGES_ITEM_TEXT, LISTS_TITLES } from "./config/text";
 import PostList from "./component/PostList";
 import { getPostTitle } from "./utils/functions";
+import PostButton from "./component/UI/button/PostButton";
 
 function App() {
   const [postsLanguages, setPostsLanguages] = React.useState<PostValue[]>([
@@ -37,6 +38,11 @@ function App() {
 
   return (
     <div className="App">
+      <form>
+        <input type="text" placeholder="Post name" />
+        <input type="text" placeholder="Post about" />
+        <PostButton disabled>Create Post</PostButton> 
+      </form>
       <PostList posts={postsLanguages} title={titleLanguages} />
       <PostList posts={postsDevelopers} title={titleDevelopers} />
     </div>
