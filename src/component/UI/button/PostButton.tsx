@@ -1,8 +1,8 @@
 import React from "react";
 import classes from "./PostButton.module.css";
-import { HTMLProps } from "../../../types";
+import { HTMLButtonProps } from "../../../types";
 
-const PostButton = (props: HTMLProps) => {
+const PostButton = (props: HTMLButtonProps) => {
   return (
     <button {...props} className={classes.postBtn}>
       {}

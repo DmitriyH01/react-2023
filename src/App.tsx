@@ -5,6 +5,7 @@ import { DEVELOPERS_ITEM_TEXT, LANGUAGES_ITEM_TEXT, LISTS_TITLES } from "./confi
 import PostList from "./component/PostList";
 import { getPostTitle } from "./utils/functions";
 import PostButton from "./component/UI/button/PostButton";
+import PostInput from "./component/UI/input/PostInput";
 
 function App() {
   const [postsLanguages, setPostsLanguages] = React.useState<PostValue[]>([
@@ -36,12 +37,23 @@ function App() {
   const [titleLanguages, setTitleLanguages] = React.useState<string>(LISTS_TITLES.listLanguages);
   const [titleDevelopers, setTitleDevelopers] = React.useState<string>(LISTS_TITLES.listDevelopers);
 
+  const [inputTitle, setInputTitle] = React.useState<string>("");
+  const bodyInputRef = React.useRef<HTMLInputElement>(null);
+
+  const addNewPost = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+  };
   return (
     <div className="App">
       <form>
-        <input type="text" placeholder="Post name" />
-        <input type="text" placeholder="Post about" />
-        <PostButton disabled>Create Post</PostButton> 
+        <PostInput
+          value={inputTitle}
+          onChange={(e) => setInputTitle(e.target.value)}
+          type="text"
+          placeholder="Post name"
+        />
+        <PostInput ref={bodyInputRef} type="text" placeholder="Post about" />
+        <PostButton>Create Post</PostButton>
       </form>
       <PostList posts={postsLanguages} title={titleLanguages} />
       <PostList posts={postsDevelopers} title={titleDevelopers} />

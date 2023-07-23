@@ -1,6 +1,9 @@
 import React from "react";
-import { HTMLProps, HtmlProps } from "../../../types";
+import { HTMLInputProps } from "../../../types";
+import classes from "./PostInput.module.css";
 
-const PostInput = (props: HTMLProps) => {
-  return <input type="text" />;
-};
+const PostInput = React.forwardRef((props: HTMLInputProps, ref: React.LegacyRef<HTMLInputElement>) => {
+  return <input ref={ref} className={classes.postInput} {...props} />;
+});
+
+export default PostInput;
