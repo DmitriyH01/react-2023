@@ -38,10 +38,18 @@ function App() {
   const [titleDevelopers, setTitleDevelopers] = React.useState<string>(LISTS_TITLES.listDevelopers);
 
   const [inputTitle, setInputTitle] = React.useState<string>("");
-  const bodyInputRef = React.useRef<HTMLInputElement>(null);
+  const [inputBody, setInputBody] = React.useState<string>("");
 
-  const addNewPost = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const addNewPost = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.preventDefault();
+    const newPost: PostValue = {
+      id: postsLanguages.length + 1,
+      title: inputTitle,
+      body: inputBody,
+    };
+    setPostsLanguages([...postsLanguages, newPost]);
+    setInputTitle("");
+    setInputBody("");
   };
   return (
     <div className="App">
@@ -52,8 +60,13 @@ function App() {
           type="text"
           placeholder="Post name"
         />
-        <PostInput ref={bodyInputRef} type="text" placeholder="Post about" />
-        <PostButton>Create Post</PostButton>
+        <PostInput
+          value={inputBody}
+          onChange={(e) => setInputBody(e.target.value)}
+          type="text"
+          placeholder="Post about"
+        />
+        <PostButton onClick={addNewPost}> Create Post</PostButton>
       </form>
       <PostList posts={postsLanguages} title={titleLanguages} />
       <PostList posts={postsDevelopers} title={titleDevelopers} />
