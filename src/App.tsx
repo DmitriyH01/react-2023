@@ -6,6 +6,7 @@ import PostList from "./component/PostList";
 import { getPostTitle } from "./utils/functions";
 import PostButton from "./component/UI/button/PostButton";
 import PostInput from "./component/UI/input/PostInput";
+import PostForm from "./component/PostForm";
 
 function App() {
   const [postsLanguages, setPostsLanguages] = React.useState<PostValue[]>([
@@ -36,38 +37,14 @@ function App() {
   ]);
   const [titleLanguages, setTitleLanguages] = React.useState<string>(LISTS_TITLES.listLanguages);
   const [titleDevelopers, setTitleDevelopers] = React.useState<string>(LISTS_TITLES.listDevelopers);
-
-  const [inputTitle, setInputTitle] = React.useState<string>("");
-  const [inputBody, setInputBody] = React.useState<string>("");
-
-  const addNewPost = (e: React.MouseEvent<HTMLButtonElement>): void => {
-    e.preventDefault();
-    const newPost: PostValue = {
-      id: postsLanguages.length + 1,
-      title: inputTitle,
-      body: inputBody,
-    };
+  
+  const createPost = (newPost: PostValue) => {
     setPostsLanguages([...postsLanguages, newPost]);
-    setInputTitle("");
-    setInputBody("");
   };
+
   return (
     <div className="App">
-      <form>
-        <PostInput
-          value={inputTitle}
-          onChange={(e) => setInputTitle(e.target.value)}
-          type="text"
-          placeholder="Post name"
-        />
-        <PostInput
-          value={inputBody}
-          onChange={(e) => setInputBody(e.target.value)}
-          type="text"
-          placeholder="Post about"
-        />
-        <PostButton onClick={addNewPost}> Create Post</PostButton>
-      </form>
+      <PostForm postId={postsLanguages.length} create={createPost} />
       <PostList posts={postsLanguages} title={titleLanguages} />
       <PostList posts={postsDevelopers} title={titleDevelopers} />
     </div>
