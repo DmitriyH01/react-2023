@@ -13,8 +13,10 @@ function App() {
   const [titleLanguages, setTitleLanguages] = React.useState<string>(LISTS_TITLES.listLanguages);
   const [titleDevelopers, setTitleDevelopers] = React.useState<string>(LISTS_TITLES.listDevelopers);
 
-  const createPost = (newPost: PostValue) => {
-    setPostsLanguages([...postsLanguages, newPost]);
+  const createPost = (newPost: PostValue, postList: string) => {
+    postList === LISTS_TITLES.listDevelopers
+      ? setPostsDevelopers([...postsDevelopers, newPost])
+      : setPostsLanguages([...postsLanguages, newPost]);
   };
 
   return (

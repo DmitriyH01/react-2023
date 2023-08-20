@@ -33,3 +33,13 @@
   height: 30px;
   width: 90px;
 }
+
+.post__selection {
+  display: grid;
+  padding: 10px 2px;
+  border: 1px solid teal;
+}
+
+.post__selection input{
+  margin: 0px 5px;
+}
