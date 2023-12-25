@@ -5,12 +5,13 @@ import { PostListsProps } from "../types/post";
 const PostList = (props: PostListsProps) => {
   const posts = props.posts;
   const title = props.title;
+  const deletePost = props.delete;
 
   return (
     <div>
-      <h1 className="postHeading"> {title} </h1>
+      <h1 className="postHead"> {title} </h1>
       {posts.map((post) => (
-        <PostItem value={post} key={post.id} />
+        <PostItem value={post} postsList={title} delete={deletePost} key={post.id} />
       ))}
     </div>
   );

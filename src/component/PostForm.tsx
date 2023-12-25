@@ -8,6 +8,8 @@ const PostForm = (props: {
   postId: number;
   create: (newPost: PostValue, postList: string) => void;
 }) => {
+  console.log(props.postId);
+  
   const [postId, create] = [props.postId, props.create];
 
   const [inputTitle, setInputTitle] = React.useState<string>("");

@@ -13,19 +13,45 @@ function App() {
   const [titleLanguages, setTitleLanguages] = React.useState<string>(LISTS_TITLES.listLanguages);
   const [titleDevelopers, setTitleDevelopers] = React.useState<string>(LISTS_TITLES.listDevelopers);
 
-  const createPost = (newPost: PostValue, postList: string) => {
+  const createPost = (newPost: PostValue, postList: string): void => {
     postList === LISTS_TITLES.listDevelopers
       ? setPostsDevelopers([...postsDevelopers, newPost])
       : setPostsLanguages([...postsLanguages, newPost]);
   };
 
+  const deletePost = (postId: number, postList: string): void => {
+    postList === LISTS_TITLES.listDevelopers
+      ? setPostsDevelopers(getChangedPosts(postId, postsDevelopers))
+      : setPostsLanguages(getChangedPosts(postId, postsLanguages));
+  };
+
   return (
     <div className="App">
       <PostForm postId={postsLanguages.length} create={createPost} />
-      <PostList posts={postsLanguages} title={titleLanguages} />
-      <PostList posts={postsDevelopers} title={titleDevelopers} />
+      <PostList posts={postsLanguages} title={titleLanguages} delete={deletePost} />
+      <PostList posts={postsDevelopers} title={titleDevelopers} delete={deletePost} />
     </div>
   );
 }
+
+const getChangedPosts = (postId: number, postList: PostValue[]): PostValue[] => {
+  let changedPostLIst: PostValue[] = [];
+
+  for (let i = 0; i < postList.length; i++) {
+    if (postList[i].id === postId) {
+      postList.splice(i, 1);
+    }
+    if (!postList[i]) {
+      break;
+    }
+    if (i !== postList[i].id) {
+      postList[i].id = i + 1;
+    }
+
+    changedPostLIst.push(postList[i]);
+  }
+
+  return changedPostLIst;
+};
 
 export default App;
