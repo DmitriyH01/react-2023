@@ -1,9 +1,9 @@
 import React from "react";
 import "./styles/App.css";
-import { PostValue } from "./types/post";
-import { LISTS_TITLES } from "./config/text";
 import PostList from "./component/PostList";
 import PostForm from "./component/PostForm";
+import { PostValue } from "./types/post";
+import { LISTS_TITLES } from "./config/text";
 import { POSTS } from "./config/posts";
 
 function App() {
@@ -25,9 +25,15 @@ function App() {
       : setPostsLanguages(getChangedPosts(postId, postsLanguages));
   };
 
+  const getNextPostId = (postList: string): number => {
+    return postList === LISTS_TITLES.listDevelopers
+      ? postsDevelopers.length + 1
+      : postsLanguages.length + 1;
+  };
+
   return (
     <div className="App">
-      <PostForm postId={postsLanguages.length} create={createPost} />
+      <PostForm postId={getNextPostId} create={createPost} />
       <PostList posts={postsLanguages} title={titleLanguages} delete={deletePost} />
       <PostList posts={postsDevelopers} title={titleDevelopers} delete={deletePost} />
     </div>

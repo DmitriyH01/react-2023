@@ -5,11 +5,9 @@ import { PostValue } from "../types/post";
 import PostSelect from "./PostSelect";
 
 const PostForm = (props: {
-  postId: number;
+  postId: (postList: string) => number;
   create: (newPost: PostValue, postList: string) => void;
 }) => {
-  console.log(props.postId);
-  
   const [postId, create] = [props.postId, props.create];
 
   const [inputTitle, setInputTitle] = React.useState<string>("");
@@ -20,7 +18,7 @@ const PostForm = (props: {
     e.preventDefault();
 
     const newPost: PostValue = {
-      id: postId + 1,
+      id: postId(selectedPostList),
       title: inputTitle,
       body: inputBody,
     };
