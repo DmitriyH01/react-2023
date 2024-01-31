@@ -34,30 +34,52 @@ function App() {
   return (
     <div className="App">
       <PostForm postId={getNextPostId} create={createPost} />
-      <PostList posts={postsLanguages} title={titleLanguages} delete={deletePost} />
-      <PostList posts={postsDevelopers} title={titleDevelopers} delete={deletePost} />
+      <div>
+        <hr style={{ margin: "15px 0" }}></hr>
+        <select>
+          <option value="value1"> By name</option>
+          <option value="value2"> By consists</option>
+        </select>
+      </div>
+      {getPostsList(postsLanguages, titleLanguages, deletePost)}
+      {getPostsList(postsDevelopers, titleDevelopers, deletePost)}
     </div>
   );
 }
 
+const getPostsList = (
+  posts: PostValue[],
+  title: string,
+  deletePostLogic: (postId: number, postList: string) => void
+) => {
+  return posts.length ? (
+    <PostList posts={posts} title={title} delete={deletePostLogic} />
+  ) : (
+    getEmptyPostHeader()
+  );
+};
+
+const getEmptyPostHeader = (): React.JSX.Element => <h1 className="postHead">Posts don`t found</h1>;
+
 const getChangedPosts = (postId: number, postList: PostValue[]): PostValue[] => {
-  let changedPostLIst: PostValue[] = [];
+  const changedPostList: PostValue[] = [];
+  // Remove post with specified postId
+  const filteredPostList = postList.filter((post) => post.id !== postId);
 
-  for (let i = 0; i < postList.length; i++) {
-    if (postList[i].id === postId) {
-      postList.splice(i, 1);
-    }
-    if (!postList[i]) {
-      break;
-    }
-    if (i !== postList[i].id) {
-      postList[i].id = i + 1;
-    }
+  updatePostId(filteredPostList, changedPostList);
 
-    changedPostLIst.push(postList[i]);
+  return changedPostList;
+};
+
+const updatePostId = (
+  filteredPostsList: PostValue[],
+  changedPostList: PostValue[]
+): PostValue[] => {
+  for (let i = 0; i < filteredPostsList.length; i++) {
+    const updatedPost: PostValue = { ...filteredPostsList[i], id: i + 1 };
+    changedPostList.push(updatedPost);
   }
-
-  return changedPostLIst;
+  return changedPostList;
 };
 
 export default App;
